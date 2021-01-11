@@ -1,24 +1,58 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useContext, useState, createContext} from 'react'
+import Layout from './Layout'
+import Slider from './Slider'
+import CSSTransition from "react-transition-group/cjs/CSSTransition";
+
+
+// export const createContext = React.createContext(false)
+export const Context = React.createContext();
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+    // const [context, setContext ] = useContext(createContext)
+    const [context, setContext] = useState(false);
+
+    function timeoutAnimation () {
+        setTimeout(() => {setContext(true)},1000)
+    }
+
+    timeoutAnimation()
+
+    // console.log('context', context)
+
+    return (
+
+        <Context.Provider value={[context, setContext]}>
+      <Layout>
+
+      <h1>Hello World</h1>
+
+          <h2>{context}</h2>
+
+    <CSSTransition
+        in={context}
+        timeout={{appear:5000, enter: 5000}}
+        classNames={{
+            appear: "scrollAppear",
+            appearActive:"scrollAppearActive",
+            appearDone: "scrollAppearDone",
+            enter:"scrollEnter",
+            enterActive:"scrollEnterActive",
+            enterDone:"scrollEnterDone"
+        }}
+        appear={true}
+    >
+        <p className="paragraph">This should be displayed at the same time as header and slider: {context}</p>
+
+    </CSSTransition>
+
+         <Slider/>
+
+
+      </Layout>
+            </Context.Provider>
   );
 }
 

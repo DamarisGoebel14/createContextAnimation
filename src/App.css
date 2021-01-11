@@ -36,3 +36,29 @@
     transform: rotate(360deg);
   }
 }
+
+.paragraph {
+  background:magenta;
+}
+
+.scrollEnter {
+  opacity: 0;
+}
+
+.scrollEnterActive {
+  opacity: 1;
+  transition: opacity 5000ms;
+}
+
+.scrollEnterDone {
+  opacity:1;
+}
+
+.scrollAppear {
+  opacity:0;
+}
+
+.scrollAppearActive {
+  opacity: 1;
+  transition: opacity 5000ms ease;
+}
